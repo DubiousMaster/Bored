@@ -1,0 +1,7 @@
+D:\dutch\Projects\Educom\FoodFact\frontend\FoodFact\Core\bin\Debug\Core.exe.config
+D:\dutch\Projects\Educom\FoodFact\frontend\FoodFact\Core\bin\Debug\Core.exe
+D:\dutch\Projects\Educom\FoodFact\frontend\FoodFact\Core\bin\Debug\Core.pdb
+D:\dutch\Projects\Educom\FoodFact\frontend\FoodFact\Core\obj\Debug\Core.csprojAssemblyReference.cache
+D:\dutch\Projects\Educom\FoodFact\frontend\FoodFact\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
+D:\dutch\Projects\Educom\FoodFact\frontend\FoodFact\Core\obj\Debug\Core.exe
+D:\dutch\Projects\Educom\FoodFact\frontend\FoodFact\Core\obj\Debug\Core.pdb
