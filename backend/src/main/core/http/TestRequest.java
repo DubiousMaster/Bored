@@ -10,8 +10,7 @@ import main.core.db.mysql.BoredDao;
 public class TestRequest {
 	@GET
 	public Response testMethod() {
-		BoredDao dao = new BoredDao();
-		dao.getActivity(0);
+		System.out.println("Test succeeded.");
 		return Response.accepted().build();
 	}
 }

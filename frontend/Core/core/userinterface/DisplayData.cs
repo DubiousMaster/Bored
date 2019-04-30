@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.core.http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace Core.core.userinterface
         public DisplayData()
         {
             InitializeComponent();
+            new ServerCommunicator().Connect();
         }
     }
 }

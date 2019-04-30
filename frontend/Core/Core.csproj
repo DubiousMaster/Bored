@@ -39,6 +39,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="core\http\ServerCommunicator.cs" />
     <Compile Include="core\Program.cs" />
     <Compile Include="core\userinterface\DisplayData.cs">
       <SubType>Form</SubType>
@@ -53,6 +54,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="core\userinterface\DisplayData.resx">
+      <DependentUpon>DisplayData.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="core\models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
