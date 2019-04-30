@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS `ActivityType`;
 
 CREATE TABLE `ActivityType` (
 `ID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-`Name` VARCHAR(16)
+`Name` VARCHAR(16) UNIQUE NOT NULL
 );
 
 CREATE TABLE `Activity` (
@@ -14,5 +14,5 @@ CREATE TABLE `Activity` (
 `Participants` INT NOT NULL DEFAULT 1,
 `Price` DECIMAL(5,2) NOT NULL,
 `Link` VARCHAR(256) NOT NULL,
-`ActivityKey` INT(7) NOT NULL
+`ActivityKey` INT(7) UNIQUE NOT NULL
 );

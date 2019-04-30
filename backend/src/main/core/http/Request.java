@@ -1,4 +1,4 @@
-package main.http;
+package main.core.http;
 
 public abstract class Request {
 

@@ -9,6 +9,6 @@ public class Application {
 
 	public static void main(String[] args) {
 		// Run code.
-		System.out.println("Launching server on " + FULL_URL);
+		System.out.println("Launched server on " + FULL_URL);
 	}
 }

@@ -1,4 +1,4 @@
-package main.http;
+package main.core.http;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
