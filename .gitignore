@@ -334,5 +334,8 @@ MigrationBackup/
 # Visual Studio sqlite3
 sqlite3/
 
+# Visual Studio Debug
+Debug/
+
 #Do not exclude the following:
 !*/lib/*.jar
