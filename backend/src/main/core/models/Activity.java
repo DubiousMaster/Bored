@@ -2,7 +2,7 @@ package main.core.models;
 
 public class Activity {
 	private int id;
-	private String activity;
+	private String name;
 	private double accessibility;
 	private int type;
 	private int participants;
@@ -11,8 +11,8 @@ public class Activity {
 	private int activityKey;
 	
 	public int getId() { return this.id; }
-	public String getActivity() { return this.activity; }
-	public void setActivity(String value) { this.activity = value; }
+	public String getName() { return this.name; }
+	public void setName(String value) { this.name = value; }
 	public double getAccessibility() { return this.accessibility; }
 	public void setAccessibility(double value) { this.accessibility = value; }
 	public int getType() { return this.type; }
@@ -28,7 +28,7 @@ public class Activity {
 
 	public Activity(
 			int id,
-			String activity,
+			String name,
 			double accessibility,
 			int type,
 			int participants,
@@ -37,7 +37,7 @@ public class Activity {
 			int activityKey
 		) {
 		this.id = id;
-		this.activity = activity;
+		this.name = name;
 		this.accessibility = accessibility;
 		this.type = type;
 		this.participants = participants;

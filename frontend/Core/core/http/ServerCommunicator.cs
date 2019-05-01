@@ -29,7 +29,6 @@ namespace Core.core.http
                 + "/test"
                 );
             webRequest.Method = "GET";
-            Console.WriteLine(webRequest.RequestUri);
             var webResponse = webRequest.GetResponse();
         }
     }

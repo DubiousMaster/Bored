@@ -4,7 +4,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import main.core.db.mysql.BoredDao;
+import main.core.db.mysql.ActivityDao;
 
 @Path("/test")
 public class TestRequest {
