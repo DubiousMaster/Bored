@@ -22,4 +22,9 @@
     <servlet-name>bored</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+  <listener>
+    <listener-class>
+      main.core.ApplicationServletContextListener
+    </listener-class>
+  </listener>
 </web-app>
