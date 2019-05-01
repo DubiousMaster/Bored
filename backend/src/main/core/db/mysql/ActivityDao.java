@@ -98,7 +98,6 @@ public class ActivityDao {
 				PreparedStatement statement = connector.connect().prepareStatement(sql);
 				
 				ResultSet set = statement.executeQuery();
-				System.out.println("Items collected: " + set.getFetchSize());
 				
 				while(set.next()) {
 					int activityId = set.getInt("Id");
@@ -121,6 +120,7 @@ public class ActivityDao {
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Items collected: " + activities.size());
 		return activities;
 	}
 	

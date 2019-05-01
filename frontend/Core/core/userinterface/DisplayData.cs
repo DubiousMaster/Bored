@@ -16,7 +16,7 @@ namespace Core.core.userinterface
         public DisplayData()
         {
             InitializeComponent();
-            new ServerCommunicator().Connect();
+            new ServerCommunicator().GetRequest("/activities");
         }
     }
 }

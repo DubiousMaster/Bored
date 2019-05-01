@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="core\http\ServerCommunicator.cs" />
+    <Compile Include="core\models\Activity.cs" />
     <Compile Include="core\Program.cs" />
     <Compile Include="core\userinterface\DisplayData.cs">
       <SubType>Form</SubType>
@@ -60,8 +61,6 @@
       <DependentUpon>DisplayData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="core\models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

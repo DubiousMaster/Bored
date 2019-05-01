@@ -12,6 +12,7 @@ namespace Core.core.http
         private readonly string WEBSERVER_URL;
         private readonly string WEBSERVER_PORT;
         private readonly string WEBSERVER_URL_EXTENSION;
+        private string WEBSERVER_FULL_URL;
 
         public ServerCommunicator()
         {
@@ -20,16 +21,17 @@ namespace Core.core.http
             WEBSERVER_URL_EXTENSION = "/bored/rest";
         }
 
-        public void Connect()
+        public void GetRequest(String path)
         {
-            var webRequest = WebRequest.CreateHttp(
+            var webRequest = WebRequest.CreateHttp(WEBSERVER_FULL_URL =
                 WEBSERVER_URL
                 + WEBSERVER_PORT
                 + WEBSERVER_URL_EXTENSION
-                + "/test"
+                + path
                 );
             webRequest.Method = "GET";
             var webResponse = webRequest.GetResponse();
+            Console.Write(value: $"Response: {webResponse.GetResponseStream().ToString()}");
         }
     }
 }

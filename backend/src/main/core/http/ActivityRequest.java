@@ -28,6 +28,7 @@ public class ActivityRequest extends Request {
 	public Response getAllActivities() {
 		List<Activity> activities = dao.getAllActivities();
 		
+		// TODO: Change entity object.
 		return Response.status(Status.ACCEPTED).entity(activities).build();
 	}
 	
