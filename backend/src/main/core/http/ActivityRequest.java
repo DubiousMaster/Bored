@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -25,6 +26,7 @@ public class ActivityRequest extends Request {
 	private ActivityDao dao = new ActivityDao();
 	
 	@GET
+	@Produces("application/json")
 	public Response getAllActivities() {
 		List<Activity> activities = dao.getAllActivities();
 		

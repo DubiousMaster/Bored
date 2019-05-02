@@ -28,39 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnShowActivity = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lbActivities = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // btnShowActivity
             // 
-            this.button1.Location = new System.Drawing.Point(696, 393);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 29);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Show";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnShowActivity.Location = new System.Drawing.Point(696, 393);
+            this.btnShowActivity.Name = "btnShowActivity";
+            this.btnShowActivity.Size = new System.Drawing.Size(92, 29);
+            this.btnShowActivity.TabIndex = 0;
+            this.btnShowActivity.Text = "Show";
+            this.btnShowActivity.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.lbActivities);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(303, 416);
+            this.groupBox1.Size = new System.Drawing.Size(465, 416);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Activities";
             // 
-            // listBox1
+            // lbActivities
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(6, 21);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(291, 388);
-            this.listBox1.TabIndex = 0;
+            this.lbActivities.FormattingEnabled = true;
+            this.lbActivities.ItemHeight = 16;
+            this.lbActivities.Location = new System.Drawing.Point(6, 21);
+            this.lbActivities.Name = "lbActivities";
+            this.lbActivities.Size = new System.Drawing.Size(448, 388);
+            this.lbActivities.TabIndex = 0;
             // 
             // DisplayData
             // 
@@ -68,7 +68,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 434);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnShowActivity);
             this.Name = "DisplayData";
             this.Text = "I\'m so bored!";
             this.groupBox1.ResumeLayout(false);
@@ -78,8 +78,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnShowActivity;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbActivities;
     }
 }

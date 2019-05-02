@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Core.core.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,19 +21,16 @@ namespace Core.core.http
             WEBSERVER_URL = "http://localhost";
             WEBSERVER_PORT = ":8080";
             WEBSERVER_URL_EXTENSION = "/bored/rest";
+            WEBSERVER_FULL_URL = WEBSERVER_URL + WEBSERVER_PORT + WEBSERVER_URL_EXTENSION;
         }
 
-        public void GetRequest(String path)
+        public WebResponse GetRequest(String path)
         {
-            var webRequest = WebRequest.CreateHttp(WEBSERVER_FULL_URL =
-                WEBSERVER_URL
-                + WEBSERVER_PORT
-                + WEBSERVER_URL_EXTENSION
-                + path
+            var webRequest = WebRequest.CreateHttp(
+                WEBSERVER_FULL_URL + path
                 );
             webRequest.Method = "GET";
-            var webResponse = webRequest.GetResponse();
-            Console.Write(value: $"Response: {webResponse.GetResponseStream().ToString()}");
+            return webRequest.GetResponse();
         }
     }
 }
