@@ -2,9 +2,10 @@ package main.core.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DatabaseConnector {
+public abstract class Database implements AutoCloseable {
 	protected Connection connection;
 	protected final String DATABASE_DRIVER;
 	protected final String DATABASE_NAME;
@@ -12,7 +13,7 @@ public class DatabaseConnector {
 	protected final String DATABASE_URL;
 	protected final String DATABASE_USERNAME;
 
-	protected DatabaseConnector(final String name, final String url, final String driver,
+	public Database(final String name, final String url, final String driver,
 			final String username, final String password) throws SQLException, ClassNotFoundException {
 		this.DATABASE_NAME = name;
 		if (url.charAt(url.length() - 1) == '/') {
@@ -22,24 +23,20 @@ public class DatabaseConnector {
 		this.DATABASE_DRIVER = driver;
 		this.DATABASE_USERNAME = username;
 		this.DATABASE_PASSWORD = password;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-//		this.CONNECTION = DriverManager.getConnection(this.DATABASE_DRIVER + this.DATABASE_URL + "/"
-//				+ this.DATABASE_NAME, this.DATABASE_USERNAME,
-//				this.DATABASE_PASSWORD);
 	}
 	
-	public final Connection connect() throws SQLException {
+	public abstract ResultSet executeQuery(final String sql);
+	public abstract ResultSet executeQuery(final String sql, final Object[] params);
+	
+	protected final Connection connect() throws SQLException {
 		if(this.connection == null) {
 			this.connection = DriverManager.getConnection(this.DATABASE_DRIVER + this.DATABASE_URL + "/" + this.DATABASE_NAME, this.DATABASE_USERNAME, this.DATABASE_PASSWORD);
 		}
 		return this.connection;
 	}
 	
-	public final void close() throws SQLException {
+	@Override
+	public void close() throws SQLException {
 		this.connection.close();
-	}
-
-	public Connection getConnection() {
-		return this.connection;
 	}
 }

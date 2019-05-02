@@ -35,17 +35,17 @@ public class ActivityRequest extends Request {
 	}
 	
 	@GET
-	@Path("/id/{0}")
+	@Path("/id/{activityId}")
 	public Response getActivityById(@PathParam("activityId") int id) {
-		Activity activity = dao.getActivity(id);
+		Activity activity = dao.getActivityById(id);
 		
 		return Response.status(Status.ACCEPTED).entity(activity).build();
 	}
 	
 	@GET
-	@Path("/key/{0}")
+	@Path("/key/{activityKey}")
 	public Response getActivityByKey(@PathParam("activityKey") int key) {
-		Activity activity = dao.getActivity(key);
+		Activity activity = dao.getActivityByKey(key);
 		
 		return Response.status(Status.ACCEPTED).entity(activity).build();
 	}
