@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import main.core.db.mysql.ActivityDao;
+import main.core.db.mysql.dao.ActivityDao;
 import main.core.models.Activity;
 
 /**

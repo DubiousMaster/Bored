@@ -3,7 +3,7 @@ package main.core;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import main.core.db.mysql.ActivityDao;
+import main.core.db.mysql.dao.ActivityDao;
 
 public class ApplicationServletContextListener implements ServletContextListener {
 

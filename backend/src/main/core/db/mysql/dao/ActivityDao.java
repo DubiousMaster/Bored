@@ -1,4 +1,4 @@
-package main.core.db.mysql;
+package main.core.db.mysql.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.core.db.Database;
+import main.core.db.mysql.MySqlDatabase;
+import main.core.db.mysql.MySqlQueryBuilder;
 import main.core.models.Activity;
 
-public class ActivityDao {
+public class ActivityDao extends Dao {
 
 	public Activity getActivityById(final int id) {
 		if (id < 0)

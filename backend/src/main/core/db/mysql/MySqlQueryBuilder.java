@@ -5,25 +5,25 @@ package main.core.db.mysql;
  * @author Alex Tigchelaar
  *
  */
-class MySqlQueryBuilder {
+public class MySqlQueryBuilder {
 	
-	static String buildSelectQuery(String[] columns, String[] tables) {
+	public static String buildSelectQuery(String[] columns, String[] tables) {
 		return select(columns) + from(tables) + ";";
 	}
 	
-	static String buildSelectQuery(String[] columns, String[] tables, String[] whereKeys) {
+	public static String buildSelectQuery(String[] columns, String[] tables, String[] whereKeys) {
 		return select(columns) + from(tables) + where(whereKeys) + ";";
 	}
 	
-	static String buildInsertQuery(String table, String[] valueKeys) {
+	public static String buildInsertQuery(String table, String[] valueKeys) {
 		return insert(table) + values(valueKeys) + ";";
 	}
 	
-	static String buildUpdateQuery(String table, String[] setKeys, String[] whereKeys) {
+	public static String buildUpdateQuery(String table, String[] setKeys, String[] whereKeys) {
 		return update(table) + set(setKeys) + where(whereKeys) + ";";
 	}
 	
-	static String buildDeleteQuery(String table, String[] whereKeys) {
+	public static String buildDeleteQuery(String table, String[] whereKeys) {
 		return delete(table) + where(whereKeys) + ";";
 	}
 	

@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class Database implements AutoCloseable {
-	protected Connection connection;
+	private Connection connection;
+	
 	protected final String DATABASE_DRIVER;
 	protected final String DATABASE_NAME;
 	protected final String DATABASE_PASSWORD;
