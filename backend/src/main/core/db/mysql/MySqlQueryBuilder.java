@@ -1,81 +1,250 @@
 package main.core.db.mysql;
 
+import java.util.List;
+
+import main.core.db.models.Table;
+
 /**
  * Dynamically create a MySql query.
+ * 
  * @author Alex Tigchelaar
  *
  */
 public class MySqlQueryBuilder {
-	
-	public static String buildSelectQuery(String[] columns, String[] tables) {
-		return select(columns) + from(tables) + ";";
+
+	/**
+	 * Create a simple Select query without parameters.
+	 * 
+	 * @param tables Define which columns are collected. The Key must be the table
+	 *               name. The Values must be all columns collected from the Key
+	 *               table.
+	 * @return Returns a String version of the select query.
+	 */
+	public static String buildSelectQuery(List<Table> selectTables) {
+		return select(selectTables) + from(selectTables);
 	}
-	
-	public static String buildSelectQuery(String[] columns, String[] tables, String[] whereKeys) {
-		return select(columns) + from(tables) + where(whereKeys) + ";";
+
+	/**
+	 * Create a simple Select query with parameters.
+	 * 
+	 * @param tables Define which columns are collected. The Key must be the table
+	 *               name. The Values must be all columns collected from the Key
+	 *               table.
+	 * @param where  Define which columns are filtered on. The Key must be the table
+	 *               name. The Values must be all columns included in the "where"
+	 *               clause.
+	 * @return Returns a String version of the select query.
+	 */
+	public static String buildSelectQuery(List<Table> selectTables, List<Table> whereTables) {
+		return select(selectTables) + from(selectTables) + where(whereTables);
 	}
-	
-	public static String buildInsertQuery(String table, String[] valueKeys) {
-		return insert(table) + values(valueKeys) + ";";
+
+//	/**
+//	 * Create a Select query with joined tables and without parameters.
+//	 * 
+//	 * @param tables     Define which columns are collected. The Key must be the
+//	 *                   table name. The Values must be all columns collected from
+//	 *                   the Key table.
+//	 * @param joinTables Define which tables are joined. The Key must be the table
+//	 *                   name and column name. The Values must be the table name and
+//	 *                   the column uniting the column referred to in the Key.
+//	 * @return Returns a String version of the select query.
+//	 */
+//	public static String buildSelectJoinQuery(List<Table> selectTables,
+//			List<Table> joinTables) {
+//		String joins = "";
+//		for(Table joinTable : joinTables) {
+//			joins = joins + 
+//		}
+//		return select(selectTables) + from(selectTables) + join(joinTables);
+//	}
+//
+//	/**
+//	 * Create a Select query with joined tables and parameters.
+//	 * 
+//	 * @param selectTables Define which columns are collected. The Key must be the
+//	 *                     table name. The Values must be all columns collected from
+//	 *                     the Key table.
+//	 * @param joinTables   Define which tables are joined. The Key must be the table
+//	 *                     name and column name. The Values must be the table name
+//	 *                     and the column uniting the column referred to in the Key.
+//	 * @param where        Define which columns are filtered on. The Key must be the
+//	 *                     table name. The Values must be all columns included in
+//	 *                     the "where" clause.
+//	 * @return Returns a String version of the select query.
+//	 */
+//	public static String buildSelectJoinQuery(List<Table> selectTables,
+//			List<Table> joinTables, List<Table> whereTables) {
+//		return select(selectTables) + from(selectTables) + join(joinTables) + where(whereTables);
+//	}
+
+	/**
+	 * Create a simple Insert query.
+	 * 
+	 * @param insertTables Define into which table needs to be inserted. The Key
+	 *                     must be the table name. The Values must be all columns
+	 *                     with non-default values.
+	 * @return Returns a String version of the insert query.
+	 */
+	public static String buildInsertQuery(Table insertTable) {
+		return insert(insertTable) + values(insertTable.getColumns());
 	}
-	
-	public static String buildUpdateQuery(String table, String[] setKeys, String[] whereKeys) {
-		return update(table) + set(setKeys) + where(whereKeys) + ";";
+
+	/**
+	 * Create a simple Update query.
+	 * 
+	 * @param updateTables The table and columns that need updating. The Key must be
+	 *                     the table name. The Values must be all columns that are
+	 *                     being updated.
+	 * @param where        The column names that need to match a certain
+	 *                     requirement.
+	 * @return Returns a String version of the update query.
+	 */
+	public static String buildUpdateQuery(Table updateTable, Table whereTable) {
+		return update(updateTable.getName()) + set(updateTable.getColumns()) + where(whereTable);
 	}
-	
-	public static String buildDeleteQuery(String table, String[] whereKeys) {
-		return delete(table) + where(whereKeys) + ";";
+
+	/**
+	 * Create a simple Delete query.
+	 * 
+	 * @param deleteTables The table name and column names that need to match a
+	 *                     certain requirement.
+	 * @return Returns a String version of the update query.
+	 */
+	public static String buildDeleteQuery(Table deleteTable) {
+		return delete(deleteTable.getName()) + where(deleteTable);
 	}
-	
-	private static String select(String[] columns) {
+
+	/**
+	 * Create the SELECT section of any query.
+	 * 
+	 * @param tables The table and columns from that table that need to be selected.
+	 * @return Returns the SELECT section of the query.
+	 */
+	private static String select(List<Table> tables) {
 		String select = "SELECT ";
-		for(String column : columns) {
-			select = select + (column == columns[0] ? column : ", " + column);
+		for (Table table : tables) {
+			for (String column : table.getColumns()) {
+				select = select
+						+ (select.contentEquals("SELECT ") ? "" : ", ") + table.getName() + "." + column;
+			}
 		}
 		return select;
 	}
-	
-	private static String insert(String table) {
-		return "INSERT INTO " + table;
-	}
-	
-	private static String update(String table) {
-		return "UPDATE " + table; 
-	}
-	
-	private static String delete(String table) {
-		return "DELETE " + table;
-	}
-	
-	private static String from(String[] tables) {		
+
+	/**
+	 * Create the FROM section of any query.
+	 * 
+	 * @param tables The tables that need to be selected.
+	 * @return Returns the FROM section of the query.
+	 */
+	private static String from(List<Table> tables) {
 		String from = " FROM ";
-		for(String table : tables) {
-			from = from + (table == tables[0] ? table : ", " + table);
+		for(Table table : tables) {
+			from = from + (from.contentEquals(" FROM ") ? "" : ", ") + table.getName();
 		}
 		return from;
 	}
 	
-	private static String values(String[] columns) {
-		String values = " VALUES(";
-		for(String column : columns) {
-			values = values + column == columns[0] ? column : ", " + column;
+	/**
+	 * Create the WHERE section of any query for a single table.
+	 * @param table The table and columns that need to be filtered on.
+	 * @return Returns the WHERE section of the query.
+	 */
+	private static String where(Table table) {
+		String where = " WHERE ";
+		for(String column : table.getColumns()) {
+			where = where + (where.contentEquals(" WHERE ") ? table.getName() : " AND " + table.getName()) + "." + column + " = ?";
 		}
-		return (values + ")");
+		return where;
+	}
+
+	/**
+	 * Create the WHERE section of any query for multiple tables.
+	 * @param tables The tables and columns that need to be filtered on.
+	 * @return Returns the WHERE section of the query.
+	 */
+	private static String where(List<Table> tables) {
+		String where = " WHERE ";
+		for(Table table : tables) {
+			for(String column : table.getColumns()) {
+			where = where + (where.contentEquals(" WHERE ") ? table.getName() : " AND " + table.getName()) + "." + column + " = ?";
+			}
+		}
+		return where;
 	}
 	
-	private static String set(String[] columns) {
+//	/**
+//	 * Create the JOIN section of any query.
+//	 * @param tables The tables and columns that need to be linked together.
+//	 * @return Returns the JOIN section of the query.
+//	 */
+//	private static String join(Table newTable, Table oldTable) {
+//		 String join = " JOIN ";
+//		 join = join + newTable.getName() + " ON " + oldTable.getName() + "." + oldTable.getColumns().get(0) + " = " + newTable.getName() + "." + newTable.getColumns().get(0);
+//		 return join;
+//	}
+	
+	/**
+	 * Create the INSERT section of any query.
+	 * @param table The table and columns that need to be inserted into.
+	 * @return Returns the JOIN section of the query.
+	 */
+	private static String insert(Table table) {
+		String insert = "INSERT INTO ";
+		for(String column : table.getColumns()) {
+			insert = insert + (insert.contentEquals("INSERT INTO ") ? table.getName() + " (" + column : ", " + column);
+		}
+		insert = insert + ")";
+		return insert;
+	}
+	
+	/**
+	 * Create the VALUES section of any query.
+	 * @param columns The columns that are inserted into.
+	 * @return Returns the VALUES section of the query.
+	 */
+	private static String values(List<String> columns) {
+		String values = " VALUES ";
+		for(int i = 0; i < columns.size(); i += 1) {
+			values = values + (values.contentEquals(" VALUES ") ? "(" : ", ") + "?";
+		}
+		values = values + ")";
+		return values;
+	}
+	
+	/**
+	 * Creates the UPDATE section of any query.
+	 * @param table The table that is being updated.
+	 * @return Returns the UPDATE section of the query.
+	 */
+	private static String update(String table) {
+		String update = "UPDATE ";
+		update = update + table;
+		return update;
+	}
+	
+	/**
+	 * Creates the SET section of any query.
+	 * @param columns The tables that are being set.
+	 * @return Returns the SET section of the query.
+	 */
+	private static String set(List<String> columns) {
 		String set = " SET ";
 		for(String column : columns) {
-			set = set + (column == columns[0] ? column : ", " + column) + " = ?";
+			set = set + (set.contentEquals(" SET ") ? "" : ", ") + column + " = ?";
 		}
 		return set;
 	}
 	
-	private static String where(String[] columns) {
-		String where = " WHERE ";
-		for(String column : columns) {
-			where = where + (column == columns[0] ? column : ", " + column) + " = ?";
-		}
-		return where;
+	/**
+	 * Creates the DELETE section of any query.
+	 * @param table The table that is being deleted from.
+	 * @return Returns the DELETE section of the query.
+	 */
+	private static String delete(String table) {
+		String delete = "DELETE FROM ";
+		delete = delete + table;
+		return delete;
 	}
 }

@@ -1,49 +1,80 @@
 package main.core.models;
 
-public class Activity {
-	private int id;
-	private String name;
+public final class Activity extends Entity {
 	private double accessibility;
-	private int type;
+	private int activityKey;
+	private String activityType;
+	private String link;
+	private String name;
 	private int participants;
 	private double price;
-	private String link;
-	private int activityKey;
-	
-	public int getId() { return this.id; }
-	public String getName() { return this.name; }
-	public void setName(String value) { this.name = value; }
-	public double getAccessibility() { return this.accessibility; }
-	public void setAccessibility(double value) { this.accessibility = value; }
-	public int getType() { return this.type; }
-	public void setType(int value) { this.type = value; }
-	public int getParticipants() { return this.participants; }
-	public void setParticipants(int value) { this.participants = value; }
-	public double getPrice() { return this.price; }
-	public void setPrice(double value) { this.price = value; }
-	public String getLink() { return this.link; }
-	public void setLink(String value) { this.link = value; }
-	public int getActivityKey() { return this.activityKey; }
-	public void setActivityKey(int value) { this.activityKey = value; }
 
-	public Activity(
-			int id,
-			String name,
-			double accessibility,
-			int type,
-			int participants,
-			double price,
-			String link,
-			int activityKey
-		) {
-		this.id = id;
-		this.name = name;
-		this.accessibility = accessibility;
-		this.type = type;
-		this.participants = participants;
-		this.price = price;
-		this.link = link;
-		this.activityKey = activityKey;
+	public Activity(final String name, final double accessibility, final String activityType, final int participants,
+			final double price, final String link, final int activityKey) {
+		super();
+		this.setName(name);
+		this.setAccessibility(accessibility);
+		this.setActivityType(activityType);
+		this.setParticipants(participants);
+		this.setPrice(price);
+		this.setLink(link);
+		this.setActivityKey(activityKey);
+	}
+
+	public double getAccessibility() {
+		return this.accessibility;
+	}
+
+	public int getActivityKey() {
+		return this.activityKey;
+	}
+
+	public String getActivityType() {
+		return this.activityType;
+	}
+
+	public String getLink() {
+		return this.link;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public int getParticipants() {
+		return this.participants;
+	}
+
+	public double getPrice() {
+		return this.price;
+	}
+
+	private void setAccessibility(final double value) {
+		this.accessibility = value;
+	}
+
+	private void setActivityKey(final int value) {
+		this.activityKey = value;
+	}
+
+	private void setActivityType(final String value) {
+		this.activityType = value;
+	}
+
+	private void setLink(final String value) {
+		this.link = value;
+	}
+
+	private void setName(final String value) {
+		this.name = value;
+	}
+
+	private void setParticipants(final int value) {
+		this.participants = value;
+	}
+
+	private void setPrice(final double value) {
+		this.price = value;
 	}
 
 }

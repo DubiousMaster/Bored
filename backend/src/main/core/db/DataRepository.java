@@ -5,6 +5,7 @@ import java.util.List;
 import main.core.db.mock.MockRepository;
 import main.core.db.mysql.MySqlRepository;
 import main.core.models.Activity;
+import main.core.models.ActivityType;
 
 public abstract class DataRepository {
 	
@@ -25,9 +26,11 @@ public abstract class DataRepository {
 
 	public abstract void deleteActivity(Activity activity);
 
-	public abstract Activity readActivityById(int id);
-
 	public abstract Activity readActivityByKey(int key);
+	
+	public abstract ActivityType readActivityTypeById(int id);
+	
+	public abstract ActivityType readActivityTypeByName(String name);
 
 	public abstract List<Activity> readAllActivities();
 
@@ -44,6 +47,8 @@ public abstract class DataRepository {
 	public abstract List<Activity> readAllActivitiesByPrice(int lowerBound, int upperBound);
 
 	public abstract List<Activity> readAllActivitiesByType(String activityType);
+	
+	public abstract List<ActivityType> readAllActivityTypes();
 
 	public abstract void storeActivity(Activity activity);
 

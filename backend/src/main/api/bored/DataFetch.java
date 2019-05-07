@@ -7,15 +7,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import main.core.models.Activity;
-import main.core.models.ActivityType;
 
 public class DataFetch {
 	private static final String BORED_URL = "http://www.boredapi.com/api";
 	private static final String BORED_REQUEST = "/activity";
 	private static final String FULL_BORED_URL = BORED_URL + BORED_REQUEST;
 	
-	public static Object[] fetchData() {
-		Object[] data = new Object[2];
+	public static Activity fetchData() {
+		Activity data = null;
 		try {
 			URL url = new URL(FULL_BORED_URL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -29,17 +28,12 @@ public class DataFetch {
 				String outOfJson = line.replaceAll("[\"{}]", "");
 //				System.out.println(line);
 				String[] keyValue = outOfJson.split("[:,]");
-				System.out.println(line);
-				for(String s : keyValue) {
-					System.out.println(s);
-				}
 				
 				if(keyValue.length == 12) {
-					data[0] = new Activity(
-							-1,
+					data = new Activity(
 							keyValue[1],
 							Double.parseDouble(keyValue[3]),
-							-1,
+							keyValue[5],
 							Integer.parseInt(keyValue[7]),
 							Double.parseDouble(keyValue[9]),
 							"",
@@ -47,22 +41,16 @@ public class DataFetch {
 							);
 				} else {
 				
-				data[0] = new Activity(
-						-1,
+				data = new Activity(
 						keyValue[1],
 						Double.parseDouble(keyValue[3]),
-						-1,
+						keyValue[5],
 						Integer.parseInt(keyValue[7]),
 						Double.parseDouble(keyValue[9]),
 						keyValue[11] + ":" + keyValue[12],
 						Integer.parseInt(keyValue[14])
 						);
 				}
-				
-				data[1] = new ActivityType(
-						-1,
-						keyValue[5]
-						);
 			}
 			reader.close();
 		} catch (IOException e) {

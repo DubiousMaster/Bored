@@ -24,4 +24,14 @@ public final class MockDatabase extends Database {
 		return null;
 	}
 
+	@Override
+	public void execute(String sql) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void execute(String sql, Object[] params) {
+		// TODO Auto-generated method stub
+	}
+
 }

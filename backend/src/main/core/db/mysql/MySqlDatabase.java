@@ -32,13 +32,13 @@ public final class MySqlDatabase extends Database {
 	}
 
 	@Override
-	public final ResultSet executeQuery(final String sql, final Object[] values) {
+	public final ResultSet executeQuery(final String sql, final Object[] params) {
 		ResultSet set = null;
 		try {
 			final PreparedStatement statement = super.connect().prepareStatement(sql);
-			for (int i = 0; i < values.length; i += 1) {
+			for (int i = 0; i < params.length; i += 1) {
 				final int index = i + 1;
-				final Object o = values[i];
+				final Object o = params[i];
 				if (o instanceof Double) {
 					statement.setDouble(index, (double) o);
 				}
@@ -51,6 +51,9 @@ public final class MySqlDatabase extends Database {
 				if (o instanceof Date) {
 					statement.setDate(index, new java.sql.Date(((Date) o).getTime()));
 				}
+				if (o instanceof Boolean) {
+					statement.setBoolean(index, (boolean) o);
+				}
 			}
 			set = statement.executeQuery();
 		} catch (final SQLException e) {
@@ -58,5 +61,45 @@ public final class MySqlDatabase extends Database {
 			e.printStackTrace();
 		}
 		return set;
+	}
+
+	@Override
+	public void execute(String sql) {
+		try {
+			super.connect().createStatement().execute(sql);
+		} catch (final SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void execute(String sql, Object[] params) {
+		try {
+			final PreparedStatement statement = super.connect().prepareStatement(sql);
+			for (int i = 0; i < params.length; i += 1) {
+				final int index = i + 1;
+				final Object o = params[i];
+				if (o instanceof Double) {
+					statement.setDouble(index, (double) o);
+				}
+				if (o instanceof Integer) {
+					statement.setInt(index, (int) o);
+				}
+				if (o instanceof String) {
+					statement.setString(index, (String) o);
+				}
+				if (o instanceof Date) {
+					statement.setDate(index, new java.sql.Date(((Date) o).getTime()));
+				}
+				if (o instanceof Boolean) {
+					statement.setBoolean(index, (boolean) o);
+				}
+			}
+			statement.execute();
+		} catch (final SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
