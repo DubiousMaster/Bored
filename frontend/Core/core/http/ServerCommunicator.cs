@@ -1,6 +1,7 @@
 ﻿using Core.core.models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -24,12 +25,26 @@ namespace Core.core.http
             WEBSERVER_FULL_URL = WEBSERVER_URL + WEBSERVER_PORT + WEBSERVER_URL_EXTENSION;
         }
 
-        public WebResponse GetRequest(String path)
+        public WebResponse GetRequest(string path)
         {
             var webRequest = WebRequest.CreateHttp(
                 WEBSERVER_FULL_URL + path
                 );
             webRequest.Method = "GET";
+            return webRequest.GetResponse();
+        }
+
+        public async Task<WebResponse> PostRequestAsync(string path, string objects)
+        {
+            var webRequest = WebRequest.CreateHttp(
+                WEBSERVER_FULL_URL + path
+                );
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/json";
+            var dataStream = await webRequest.GetRequestStreamAsync();
+            var bytes = Encoding.UTF8.GetBytes(objects);
+            await dataStream.WriteAsync(bytes, 0, bytes.Length);
+            dataStream.Close();
             return webRequest.GetResponse();
         }
     }

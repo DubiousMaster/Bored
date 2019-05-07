@@ -24,12 +24,17 @@ namespace Core.core.userinterface
             var deserializedActivity = serializer.ReadObject(webResponse.GetResponseStream()) as List<Activity>;
             webResponse.Close();
 
-            foreach (Activity a in deserializedActivity)
+            foreach (var a in deserializedActivity)
             {
                 Console.WriteLine(a.name);
             }
 
             this.lbActivities.Items.AddRange(deserializedActivity.ToArray());
+        }
+
+        private void BtnAdvancedSearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
