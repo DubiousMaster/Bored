@@ -16,3 +16,15 @@ CREATE TABLE `Activity` (
 `Link` VARCHAR(256) NOT NULL,
 `ActivityKey` INT(7) UNIQUE NOT NULL
 );
+
+INSERT INTO `ActivityType`
+(`Name`)
+VALUES 
+('Playground'),
+('Night out');
+
+INSERT INTO `Activity`
+(`Name`, `Accessibility`, `ActivityTypeId`, `Participants`, `Price`, `Link`, `ActivityKey`)
+VALUES
+('Go down a slide 20 times.', 0.01, 1, 1, 0.00, '', 5425672),
+('Go clubbing.', 0.23, 2, 3, 25.00, 'http://thisisalink.com', 2651632);
